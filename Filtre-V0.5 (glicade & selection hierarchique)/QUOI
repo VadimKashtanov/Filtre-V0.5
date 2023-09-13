@@ -1,0 +1,12 @@
+suppression (peut etre temporaire) de :
+	- evolution
+	- couches fltr et neu
+	- neu_depuis, flt_depuis
+	- le prince meme du _depuis
+
+reconstruction du mdl :
+	- le neu_cond lie toutes les valeurs de la couche d'avant.
+pas d'alea, le 0er neurone condition le y[0],y[1] puis le 1er le y[1],y[2] ...
+comme une sorte de convolution mais cette fois ce conditionnelle
+
+	- on definie `le_pas` comme etant le pas de la convolution conditionnelle sur les y[-1] 
