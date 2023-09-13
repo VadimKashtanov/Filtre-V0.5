@@ -96,8 +96,11 @@ float f(Mdl_t * mdl, uint depart) {
 		uint interv = intervalles[mdl->intervalles[i]];
 		uint glisser = mdl->glisser[i];
 		//
-		_max = 0;
-		FOR(0, g, glisser) {
+		FOR(0, j, n[0]) _x[j] = ema[_ema][depart - j*interv];
+		_max = filtre_n(
+				_x, mdl->conste + i*CONSTES_FLTR(n[0]), n[0]);
+		//
+		FOR(1, g, glisser) {
 			FOR(0, j, n[0]) {
 				_x[j] = ema[_ema][depart - (j-g)*interv];
 			}

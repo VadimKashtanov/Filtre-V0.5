@@ -14,8 +14,8 @@
 //		1 - cond
 //
 
-#define C_max 10
-#define Y_max 50
+#define C_max 5
+#define Y_max 20
 
 #define N0_max 8
 #define N1_max 3
@@ -56,6 +56,13 @@ Mdl_t * cree_mdl(uint C, uint * y, uint * n, uint * type);
 void liberer_mdl(Mdl_t * mdl);
 Mdl_t * copier_mdl(Mdl_t * mdl);
 
+//	Copies spetiales
+void copier_constes(Mdl_t * de, Mdl_t * vers);
+void copier_poids(Mdl_t * de, Mdl_t * vers);
+void copier_glissade(Mdl_t * de, Mdl_t * vers);
+void copier_ema(Mdl_t * de, Mdl_t * vers);
+void copier_intervalles(Mdl_t * de, Mdl_t * vers);
+
 //  Controle
 uint meme_mdl(Mdl_t * A, Mdl_t * B);
 uint hash_mdl(Mdl_t * mdl);
@@ -70,6 +77,7 @@ void comportement(Mdl_t * mdl);
 
 //	Qlqs fonctions directes
 float poid_cond_rnd();	//{-1,-.75,-.50,-.25,0,+.25,+.5,+.75,+1}
+float poid_cond_le_plus_proche(float x);
 
 //	Calcule f(x)
 float f(Mdl_t * mdl, uint depart);

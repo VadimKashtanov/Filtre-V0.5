@@ -29,9 +29,14 @@ static void plume_constes(Mdl_t * mdl) {
 			FOR(0, j, mdl->y[i]) {
 				ptr(" .y%i:\n", j);
 				FOR(0, k, constantes) {
-					ptr("%i| %f\n",
+					ptr("%3.i| %f ",
 					mdl->conste_depart[i] + j*constantes + k,
 					mdl->conste[mdl->conste_depart[i] + j*constantes + k]);
+					//
+					FOR(0, l, 1+(uint)roundf(mdl->conste[mdl->conste_depart[i] + j*constantes + k]*10)) {
+						ptr("\033[105m_\033[0m");
+					};
+					ptr("\n");
 				}
 			}
 		}
