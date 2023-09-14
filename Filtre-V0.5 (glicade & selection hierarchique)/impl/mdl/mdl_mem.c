@@ -9,6 +9,7 @@ Mdl_t * cree_mdl(uint C, uint * y, uint * n, uint * type) {
 	assert(type[0] == 0);
 	assert(y[C-1] == 1);
 	assert(n[0] <= N0_max);
+	assert(n[0] >= N0_min);
 
 	//  Configuration structurelle
 	mdl->C = C;
@@ -39,6 +40,7 @@ Mdl_t * cree_mdl(uint C, uint * y, uint * n, uint * type) {
 	FOR(1, i, C) {
 		if (type[i]==1) {
 			assert(n[i] <= N1_max);
+			assert(n[i] >= N1_min);
 			assert(y[i] == y[i-1]/2);
 			//	==== Neurone Condition ===
 			//mdl->neu_depuis[i][j][k] = 1;

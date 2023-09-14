@@ -5,7 +5,7 @@ float gain(Mdl_t * mdl, uint l) {
 	//
 	float _f, p0, p1;
 	uint t=0;
-	//UNE_COURBE(p);
+	UNE_COURBE(p);
 	for (uint i=DEPART; i < PRIXS-1-l; i++) {
 		p1 = prixs[i+l];
 		p0 = prixs[i];
@@ -17,9 +17,9 @@ float gain(Mdl_t * mdl, uint l) {
 		} else {
 			return -USDT;
 		}
-	//	SUIVIE_COURBE(p, _gain);
+		SUIVIE_COURBE(p, _gain);
 	};
-	//PLUMER_LA_COURBE(p);
+	PLUMER_LA_COURBE(p);
 
 	return _gain - USDT;
 };
@@ -39,7 +39,7 @@ float prediction(Mdl_t * mdl, uint l) {
 			_prediction += 1.0;
 
 		//
-#define div_par 5*(1+rand()%10)
+#define div_par 10*(1+rand()%10)
 		i += div_par;
 		t++;
 	};

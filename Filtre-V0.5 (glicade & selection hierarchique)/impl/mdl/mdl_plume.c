@@ -2,6 +2,8 @@
 
 static char * noms[] = {"Filtre-Prix", "Condition"};
 
+#define HAUT "\033[101m \033[0m"
+#define _BAS "\033[102m \033[0m"
 static void plume_poids(Mdl_t * mdl) {
 	ptr(" === poids ===\n");
 	FOR(0, i, mdl->C) {
@@ -10,10 +12,29 @@ static void plume_poids(Mdl_t * mdl) {
 			uint poids = POIDS_COND(mdl->n[i]);
 			FOR(0, j, mdl->y[i]) {
 				ptr(" .y%i:\n", j);
-				FOR(0, k, poids) {
-					ptr("%i| %f\n",
-					mdl->poid_depart[i] + j*poids + k,
-					mdl->poid[mdl->poid_depart[i] + j*poids + k]);
+				if (mdl->n[i] == 2) {
+					ptr("%i| %+f  %s %s\n",
+						mdl->poid_depart[i] + j*poids + 0,
+						mdl->poid[mdl->poid_depart[i] + j*poids + 0],
+						HAUT, HAUT);
+					ptr("%i| %+f  %s %s\n",
+						mdl->poid_depart[i] + j*poids + 1,
+						mdl->poid[mdl->poid_depart[i] + j*poids + 1],
+						_BAS, HAUT);
+					ptr("%i| %+f  %s %s\n",
+						mdl->poid_depart[i] + j*poids + 2,
+						mdl->poid[mdl->poid_depart[i] + j*poids + 2],
+						HAUT, _BAS);
+					ptr("%i| %+f  %s %s\n",
+						mdl->poid_depart[i] + j*poids + 3,
+						mdl->poid[mdl->poid_depart[i] + j*poids + 3],
+						_BAS, _BAS);
+				} else {
+					FOR(0, k, poids) {
+						ptr("%i| %+f\n",
+						mdl->poid_depart[i] + j*poids + k,
+						mdl->poid[mdl->poid_depart[i] + j*poids + k]);
+					}
 				}
 			}
 		}

@@ -4,12 +4,12 @@ uint C      = 2;
 uint type[] = {0,1};
 //
 uint y[]    = {2,1};
-uint n[]    = {8,2};
+uint n[]    = {6,2};
 
 Env_t env = {
 	//  Le gagant ne muteras jamais
-	.MUTP_cst           =0.50,  .COEF_G_cst           =0.40,
-	.MUTP_p             =0.50,	.COEF_G_p             =0.40,
+	.MUTP_cst           =1.00,  .COEF_G_cst           =0.50,
+	.MUTP_p             =0.50,	.COEF_G_p             =0.80,
 	//
 	.MUTP_ema           =0.50,  .COEF_G_ema           =0.80,
 	.MUTP_int           =0.50,  .COEF_G_int           =0.80,
@@ -27,23 +27,25 @@ int main() {
 	srand(0);
 	charger_les_prixs();
 
-	Mdl_t * mdl[5];
-	FOR(0, i, 5) mdl[i] = cree_mdl(C, y, n, type);
+	Mdl_t * mdl[7];
+	FOR(0, i, 7) mdl[i] = cree_mdl(C, y, n, type);
 
-	float scores[5];
-	uint rang[5];
+	plume_mdl(mdl[0]);
+
+	float scores[7];
+	uint rang[7];
 	uint c;
 	float tmp;
-	FOR(0, t, 50) {
-		FOR(0, i, 5) {
+	FOR(0, t, 100) {
+		FOR(0, i, 7) {
 			scores[i] = prediction(mdl[i], env.l);
 			rang[i] = i;
 		//	printf("%f, ", scores[i]);
 		}
 		//printf("\n");
 		//
-		FOR(0, i, 5) {
-			FOR(i, j, 5) {
+		FOR(0, i, 7) {
+			FOR(i, j, 7) {
 				if (scores[rang[i]] < scores[rang[j]]) {
 					//tmp = scores[i];
 					//scores[i] = scores[j]
@@ -55,7 +57,7 @@ int main() {
 				}
 			}
 		}
-		FOR(0, i, 5) {
+		FOR(0, i, 7) {
 			if (i != 0) {
 				muter_filtres(mdl[rang[0]], mdl[rang[i]], env.MUTP_cst, env.COEF_G_cst);
 				muter_poids(mdl[rang[0]], mdl[rang[i]], env.MUTP_p, env.COEF_G_p);
@@ -82,8 +84,9 @@ int main() {
 		mdl = cree_mdl(C, y, n, type);
 		score(mdl);
 	}*/
-
+	printf("Gain = %f\n", gain(mdl[rang[0]], env.l));
 	comportement(mdl[rang[0]]);
+	//comportement(mdl[rang[0]]);
 	plume_mdl(mdl[rang[0]]);
 };
 

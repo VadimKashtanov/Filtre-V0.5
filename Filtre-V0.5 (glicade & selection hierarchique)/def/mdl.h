@@ -20,6 +20,9 @@
 #define N0_max 8
 #define N1_max 3
 
+#define N0_min 3
+#define N1_min 2
+
 #define N_MAX MAX2(N0_max, N1_max)
 
 #define POIDS_COND(n) (1<<n)	//  Si il y a n valeurs, il y a donc 2*2*2*2...*2 n fois combinaisons posibles
